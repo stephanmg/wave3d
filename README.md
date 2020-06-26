@@ -6,7 +6,7 @@ The repository contains grids (*UGX*) and script (*LUA*) files to initiate a cal
 Recent versions of [ug4](https://github.com/UG4/ugcore), [neuro collection](https://github.com/NeuroBox3D/neuro_collection), [convection diffusion](https://github.com/UG4/plugin_ConvectionDiffusion), LIMEX, Parmetis and LUA2C are required (The latter three are currently not publicly available but available through the group-internal Quadruped repository).
 
 ### Build instructions
-The user needs to enable the plugins above via `cmake -DNEURO_COLLECTION=ON -DLIMEX=ON -DParmetis=ON -DLUA2C=ON -DConvectionDiffusion=ON`.
+First the user needs to enable the plugins above via `cmake -DNEURO_COLLECTION=ON -DLIMEX=ON -DParmetis=ON -DLUA2C=ON -DConvectionDiffusion=ON` and then compile the code via `make`.
 
 ## Running a simulation
 Execute in a terminal: 
