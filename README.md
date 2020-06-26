@@ -3,10 +3,10 @@
 The repository contains grids (*UGX*) and script (*LUA*) files to initiate a calcium wave in neurons.
 
 ## Prerequisites
-Recent versions of [ug4](https://github.com/UG4/ugcore), [neuro collection](https://github.com/NeuroBox3D/neuro_collection), LIMEX, Parmetis and LUA2C are required (The latter three are currently not publicly available but available through the group-internal Quadruped repository).
+Recent versions of [ug4](https://github.com/UG4/ugcore), [neuro collection](https://github.com/NeuroBox3D/neuro_collection), [convection diffusion](https://github.com/UG4/plugin_ConvectionDiffusion), LIMEX, Parmetis and LUA2C are required (The latter three are currently not publicly available but available through the group-internal Quadruped repository).
 
 ### Build instructions
-The user needs to enable the plugins above and
+The user needs to enable the plugins above via `cmake -DNEURO_COLLECTION=ON -DLIMEX=ON -DParmetis=ON -DLUA2C=ON -DConvectionDiffusion=ON`.
 
 ## Running a simulation
 Execute in a terminal: 
