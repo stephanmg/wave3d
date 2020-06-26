@@ -3,7 +3,7 @@
 The repository contains grids (*UGX*) and script (*LUA*) files to initiate a calcium wave in neurons.
 
 ## Prerequisites
-Recent versions of [ug4](https://github.com/UG4/ugcore), [neuro collection](https://github.com/NeuroBox3D/neuro_collection) and the LIMEX plugin (Currently not publicly available).
+Recent versions of [ug4](https://github.com/UG4/ugcore), [neuro collection](https://github.com/NeuroBox3D/neuro_collection), as well as the LIMEX and Parmetis plugin are required (The latter two are currently not publicly available).
 
 ## Running a simulation
 Execute in a terminal: 
