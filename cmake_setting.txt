@@ -1,0 +1,76 @@
+-- Info: Current options:
+-- Info: TARGET:            ugshell (options are: ugshell, libug4, vrl, vrlgrid, libgrid, gridshell, ugplugin, amg, luashell)
+-- Info: DIM:               2;3 (options are: 1, 2, 3, ALL, "1;2", "1;3", "2;3")
+-- Info: CPU:               1 (options are: 1, 2, 3, 4, 5, VAR, ALL, "2;4", "1;3;4" , ...)
+-- Info: PRECISION:         double (options are: single, double)
+-- Info: STATIC_BUILD:      OFF (options are: ON, OFF)
+-- Info: DEBUG:             OFF (options are: ON, OFF)
+-- Info: DEBUG_LOGS:        OFF (options are: ON, OFF)
+-- Info: PARALLEL:          ON (options are: ON, OFF)
+-- Info: PCL_DEBUG_BARRIER: ON (options are: ON, OFF)
+-- Info: PROFILER:          None (options are: None, Shiny, Scalasca, Vampir, ScoreP)
+-- Info: PROFILE_PCL:       OFF (options are: ON, OFF)
+-- Info: CPU_FREQ:          OFF (options are: ON, OFF)
+-- Info: PROFILE_BRIDGE:    OFF (options are: ON, OFF)
+-- Info: LAPACK:            ON (options are: ON, OFF)
+-- Info: BLAS:              ON (options are: ON, OFF)
+-- Info: INTERNAL_BOOST:    ON (options are: ON, OFF)
+-- Info: EMBEDDED_PLUGINS   ON (options are: ON, OFF)
+-- Info: COMPILE_INFO       ON (options are: ON, OFF)
+-- Info: USE_LUA2C          ON (options are: ON, OFF)
+-- Info: USE_LUAJIT          (options are: ON, OFF)
+--
+-- Info: External libraries (path which contains the library or ON if you used uginstall):
+-- Info: TETGEN:
+-- Info: HLIBPRO:
+--
+-- Info: C   Compiler: /usr/bin/clang (ID: Clang)
+-- Info: C++ Compiler: /usr/bin/clang++ (ID: Clang)
+--
+-- Info: Using CPU Algebra.
+CMake Warning at ugcore/cmake/ug_includes.cmake:391 (message):
+  WARNING: C Compiler is Clang, might not work with CUDA.  Try cmake
+  -DCUDA_HOST_COMPILER=/usr/bin/gcc ..
+Call Stack (most recent call first):
+  ugcore/CMakeLists.txt:44 (include)
+
+
+-- Info: compiling with cxx flags:  -Wall -Wno-multichar -Wsign-compare -Wno-unused-local-typedef -Wno-unknown-warning-option -Wno-undefined-var-template -Wno-unneeded-internal-declaration -O3 -DNDEBUG
+-- Info: compiling with c flags:  -Wall -Wno-multichar -Wsign-compare -Wno-unused-local-typedef -Wno-unknown-warning-option -Wno-undefined-var-template -Wno-unneeded-internal-declaration -O3 -DNDEBUG
+-- Info: Using LUA2C
+-- Info: Using LAPACK (Include: , Lib: /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Accelerate.framework)
+-- Info: Using BLAS (Include: , Lib: /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Accelerate.framework)
+-- Info: Including Boost from /Users/zhi/Applications/ug4/externals/BoostForUG4
+-- Info: COMPILE_INFO enabled. Causes relinking on each run of make.
+--
+-- Info: Enabled plugins:
+--       ConvectionDiffusion, Limex, MembranePotentialMapping,
+--       Parmetis, SuperLU, cable_neuron,
+--       neuro_collection,
+-- Info: Disabled plugins:
+--
+-- Hint: To enable/disable a plugin 'PLUGIN_NAME' use the cmake option: -DPLUGIN_NAME=ON/OFF
+--
+-- Additional options for the MembranePotentialMapping (-DMPM) plugin:
+--       Testsuite:       OFF (options are: ON, OFF)
+--       VGCC:            OFF (options are: 0 (none), 1 (simple), 2 (default))
+--       OpenMP:          OFF (options are: ON, OFF)
+--       NEURON_REVISION: ON (options are: ON, OFF)
+--       NEURON_STATIC:   ON (options are: ON, OFF)
+--       SHELLTYPE:       OFF (options are none, readline)
+--       NEURON:          OFF (turn Neuron API on using -DMPMNEURON=/path/to/NEURON/install
+-- checking for thread-local storage - found
+-- Info: SuperLU is ON, using uginstall provided path /Users/zhi/local//SuperLU/used/ (Specify your own path by -DSUPERLU_PATH=... if necessary.)
+--
+-- Additional options (-DCN) for the cable_neuron plugin
+--       Testsuite:     OFF (options are: ON, OFF)
+--       Cpp11Features: ON (options are: ON, OFF)
+--
+-- Additional options for the neuro_collection plugin (-DNC for setting options):
+--       Testsuite:   OFF (options are: ON, OFF)
+--
+-- Info: SHELLTYPE: linenoise (options are: linenoise, readline, simple)
+--
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/zhi/Applications/ug4/build
