@@ -12,7 +12,15 @@ An example configuration is displayed [here](config/cmake_setting.txt).
 ## Running a simulation
 Execute in a terminal: 
 
-`ugshell -ex wave3d_revised.lua -grid zhi_y.ugx -dt 1e-8 -endTime 0.0005 -solver GMG -tol 0.02 -ryrDensity 0  -setting ry`.
+`ugshell -ex wave3d_revised.lua -grid zhi_y.ugx -dt 1e-8 -endTime 0.0005 -solver GMG -tol 0.02 -ryrDensity 0  -setting ryr`.
+
+For cylinder structure:
+
+`ugshell -ex wave3d_cylinder.lua -grid cylinder_ex.ugx -dt 1e-6 -endTime 0.05 -solver GMG -tol 0.02 -outName .  -ryrDensity 3  -setting ryr -vtk -pstep 0.005`
+
+For y-structure:
+
+`ugshell -ex wave3d_branching.lua -grid y_structure_ex.ugx -dt 1e-6 -endTime 0.05 -solver GMG -tol 0.02 -outName .  -ryrDensity 3  -setting ryr -vtk -pstep 0.005`
 
 ## Notes about LIMEX
 - LIMEX uses C++11 features, so one needs at least the following compiler revisions: 
@@ -21,3 +29,8 @@ Execute in a terminal:
 data one needs to use an older version of the LIMEX plugin before running the
 simulation by: `git checkout 1384a90d0d1f75f582563e71cdf4295f17bfd474`. This
 is a bug and should be addressed soon by the Limex plugin devlopers hopefully.
+
+
+## Usage of "take_measurement"
+
+See line 612 - 653 in wave3d_branching.lua. Note that if line 629 - 649 is uncommented, there will be a "illegal hardware instruction" error.
