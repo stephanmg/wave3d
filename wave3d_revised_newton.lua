@@ -477,8 +477,8 @@ else -- (solverID == "GMG")
 	gmg:set_gathered_base_solver_if_ambiguous(true)
 	
 	-- treat SuperLU problems with Dirichlet constraints by using constrained version
---	gmg:set_base_solver(SuperLU())
-gmg:set_base_solver(LU())
+	gmg:set_base_solver(SuperLU())
+--gmg:set_base_solver(LU())
 	
 	smoother = GaussSeidel()
 	gmg:set_smoother(smoother)
@@ -552,6 +552,7 @@ while endTime-time > 0.001*dt do
   -- apply newton solver
   if newtonSolver:apply(u) == false
   then
+    print("END" .. os.time())
     -- in case of failure:
     print ("Newton solver failed at point in time " .. time .. " with time step " .. dt)
 
@@ -593,3 +594,5 @@ while endTime-time > 0.001*dt do
     oldestSol = solTimeSeries:oldest()
   end
 end
+
+
