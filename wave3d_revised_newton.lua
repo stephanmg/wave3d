@@ -3,7 +3,6 @@ ug_load_script("ug_util.lua")
 ug_load_script("util/load_balancing_util.lua")
 ug_load_script("plugins/Limex/limex_util.lua")
 
-
 print("START" .. os.time())
 AssertPluginsLoaded({"neuro_collection", "Limex", "Parmetis"})
 
@@ -478,8 +477,8 @@ else -- (solverID == "GMG")
 	gmg:set_gathered_base_solver_if_ambiguous(true)
 	
 	-- treat SuperLU problems with Dirichlet constraints by using constrained version
-	gmg:set_base_solver(SuperLU())
---gmg:set_base_solver(LU())
+--	gmg:set_base_solver(SuperLU())
+gmg:set_base_solver(LU())
 	
 	smoother = GaussSeidel()
 	gmg:set_smoother(smoother)
@@ -508,14 +507,12 @@ newtonConvCheck = CompositeConvCheck(approxSpace, 10, 1e-17, 1e-08)
 newtonConvCheck:set_verbose(true)
 newtonConvCheck:set_time_measurement(true)
 --newtonConvCheck:set_adaptive(true)
-
-
+--
 -- Newton solver
-newtonSolver = LimexNewtonSolver()
+newtonSolver = NewtonSolver()
 newtonSolver:set_linear_solver(bicgstabSolver)
---newtonSolver:set_convergence_check(newtonConvCheck)
---newtonSolver:set_debug(dbgWriter)
-
+newtonSolver:set_convergence_check(newtonConvCheck)
+newtonSolver:set_debug(dbgWriter)
 newtonSolver:init(op)
 
 
@@ -538,66 +535,61 @@ dtmax = 1e-2
 time = 0.0
 step = 0
 
--- initial vtk output
-if (generateVTKoutput) then
-	out = VTKOutput()
-	out:print(outDir .. "vtk/solution", u, step, time)
-end
 
-
-------------------
---  LIMEX setup --
-------------------
-nstages = 2              -- number of stages
-stageNSteps = {1,2,3,4}  -- number of time steps for each stage
-
-limex = LimexTimeIntegrator(nstages)
-for i = 1, nstages do
-	limex:add_stage(stageNSteps[i], newtonSolver, domDisc)
-end
-
-limex:set_tolerance(tol)
-limex:set_time_step(dt)
-limex:set_dt_min(dtmin)
-limex:set_dt_max(dtmax)
-limex:set_increase_factor(2.0)
-limex:set_reduction_factor(0.1)
-limex:set_stepsize_greedy_order_factor(0.5)
-limex:set_stepsize_safety_factor(0.25)
-
--- GridFunction error estimator (relative norm)
---errorEvaluator = L2ErrorEvaluator("ca_cyt", "cyt", 3, 1.0) -- function name, subset names, integration order, scale
-
-errorEvalCa = SupErrorEvaluator("ca_cyt", "cyt") -- function name, subset names, scale
-errorEvalC1 = SupErrorEvaluator("c1", "erm") -- function name, subset names, scale
-limexEstimator = ScaledGridFunctionEstimator()
-limexEstimator:add(errorEvalCa)
-limexEstimator:add(errorEvalC1)
-limex:add_error_estimator(limexEstimator)
-
--- for vtk output
-if generateVTKoutput then 
-	local vtkObserver = VTKOutputObserver(outDir .."vtk/solution", out, pstep)
-	limex:attach_observer(vtkObserver)
-end
-
-
--- prepare output
-
-
---]]
+ uOld = u:clone()
+ solTimeSeries = SolutionTimeSeries()
+solTimeSeries:push(uOld, time)
 	
 -- solve problem
-limex:apply(u, endTime, u, time)
+dt = 0.01
+endTime = 0.1
+while endTime-time > 0.001*dt do
+  print("++++++ POINT IN TIME  " .. math.floor((time+dt)/dt+0.5)*dt .. "s  BEGIN ++++++")
 
+  -- setup time Disc for old solutions and timestep
+  timeDisc:prepare_step(solTimeSeries, dt)
 
-if (generateVTKoutput) then 
-	out:write_time_pvd(outDir .. "vtk/solution", u)
+  -- apply newton solver
+  if newtonSolver:apply(u) == false
+  then
+    -- in case of failure:
+    print ("Newton solver failed at point in time " .. time .. " with time step " .. dt)
+
+    dt = dt/2
+    lv = lv + 1
+    VecScaleAssign(u, 1.0, solTimeSeries:latest())
+
+    -- halve time step and try again unless time step below minimum
+    if dt < min_dt
+    then
+      print ("Time step below minimum. Aborting. Failed at point in time " .. time .. ".")
+      time = endTime
+    else
+      print ("Trying with half the time step...")
+      cb_counter[lv] = 0
+    end
+  else
+    -- update new time
+    time = solTimeSeries:time(0) + dt
+
+    -- update check-back counter and, if applicable, reset dt
+    cb_counter[lv] = cb_counter[lv] + 1
+    while cb_counter[lv] % (2*cb_interval) == 0 and lv > 0 and (time >= levelUpDelay or lv > startLv) do
+      print ("Doubling time due to continuing convergence; now: " .. 2*dt)
+      dt = 2*dt;
+      lv = lv - 1
+      cb_counter[lv] = cb_counter[lv] + cb_counter[lv+1] / 2
+      cb_counter[lv+1] = 0
+    end
+
+    -- plot solution every pstep seconds
+    if (generateVTKoutput) then
+      if math.abs(time/pstep - math.floor(time/pstep+0.5)) < 1e-5 then
+        out:print(filename .. "vtk/solution3d", u, math.floor(time/pstep+0.5), time)
+      end
+    end
+
+    -- get oldest solution
+    oldestSol = solTimeSeries:oldest()
+  end
 end
-
-
-if doProfiling then
-	WriteProfileData(outDir .."pd.pdxml")
-end
-
-
