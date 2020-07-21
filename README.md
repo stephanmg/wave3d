@@ -29,8 +29,3 @@ For y-structure:
 data one needs to use an older version of the LIMEX plugin before running the
 simulation by: `git checkout 1384a90d0d1f75f582563e71cdf4295f17bfd474`. This
 is a bug and should be addressed soon by the Limex plugin devlopers hopefully.
-
-
-## Usage of "take_measurement"
-
-See line 612 - 653 in wave3d_branching.lua. Note that if line 629 - 649 is uncommented, there will be a "illegal hardware instruction" error.
