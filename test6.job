@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name="Zhi example (384 procs)"
+#SBATCH --output="zhi_example.%j.%N.out"
+#SBATCH --partition=compute
+#SBATCH --nodes=16
+#SBATCH --ntasks-per-node=24
+#SBATCH --export=ALL
+#SBATCH -t 01:59:59
+
+# This job runs with 2 nodes, 24 cores per node for a total of 48 cores.
+# The time limit is 30 minutes and teh output will be collected in *.out.
+
+#mpirun -np 384 ugshell -ex wave3d_revised.lua -grid grids/zhi_y_refined_2.ugx -dt 1e-8 -endTime 0.0005 -solver GS -tol 0.02 -ryrDensity 0 -setting ryr -numRefs 1
+#ibrun -np 384 -v ugshell -ex wave3d_revised.lua -grid grids/zhi_y.ugx -dt 1e-8 -endTime 0.0005 -solver GMG -tol 0.02 -ryrDensity 0 -setting ryr -numRefs 1
+ibrun -np 384  -v ugshell -ex wave3d_revised.lua -grid grids/zhi_y_refined_2.ugx -dt 1e-8 -endTime 0.0005 -solver GMG -tol 0.02 -ryrDensity 0 -setting ryr

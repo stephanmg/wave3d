@@ -26,6 +26,5 @@ For y-structure:
 - LIMEX uses C++11 features, so one needs at least the following compiler revisions: 
 [Clang 3.3](https://clang.llvm.org/cxx_status.html) or [GCC 4.8.1](https://gcc.gnu.org/projects/cxx-status.html#cxx11)
 - When using LIMEX as the time stepping scheme and concurrently outputting VTK
-data one needs to use an older version of the LIMEX plugin before running the
-simulation by: `git checkout 1384a90d0d1f75f582563e71cdf4295f17bfd474`. This
-is a bug and should be addressed soon by the Limex plugin devlopers hopefully.
+data one should consider using an older version of the LIMEX plugin since collecting
+`pvd` files are not correctly written by: `git checkout 1384a90d0d1f75f582563e71cdf4295f17bfd474`. 

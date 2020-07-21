@@ -1,0 +1,6 @@
+# ignore ug files
+*.out
+*.vec
+*.pvec
+*.mat
+*.pmat
