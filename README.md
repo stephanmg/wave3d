@@ -38,7 +38,7 @@ data one should consider using an older version of the LIMEX plugin since collec
 #!/bin/bash -l        
 #PBS -l walltime=8:00:00,nodes=1:ppn=8,mem=10gb 
 #PBS -m abe 
-#PBS -M sample_email@umn.edu 
+#PBS -M youremail@temple.edu
 cd ~/program_directory
 module load intel 
 module load ompi/intel 
