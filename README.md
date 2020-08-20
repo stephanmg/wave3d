@@ -32,3 +32,15 @@ For full geometries (`pstep=0` is necessary to write VTK output data in each ste
 - When using LIMEX as the time stepping scheme and concurrently outputting VTK
 data one should consider using an older version of the LIMEX plugin since collecting
 `pvd` files are not correctly written by: `git checkout 1384a90d0d1f75f582563e71cdf4295f17bfd474`. 
+
+## Example job for Owlsnest
+```
+#!/bin/bash -l        
+#PBS -l walltime=8:00:00,nodes=1:ppn=8,mem=10gb 
+#PBS -m abe 
+#PBS -M youremail@temple.edu
+cd ~/program_directory
+module load intel 
+module load ompi/intel 
+mpirun -np 8 program_name < inputfile > outputfile
+```
