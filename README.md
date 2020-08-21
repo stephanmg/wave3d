@@ -27,8 +27,7 @@ For full geometries (`pstep=0` is necessary to write VTK output data in each ste
 `ugshell -ex wave3d_revised_sg.lua -grid full_cell_with_soma_and_subsets_assigned.ugx -dt 1e-6 -endTime 0.05 -solver GMG -tol 0.02 -outName . -ryrDensity 3  -setting ryr -vtk -pstep 0.0`
 
 ## Notes about LIMEX
-- LIMEX uses C++11 features, so one needs at least the following compiler revisions: 
-[Clang 3.3](https://clang.llvm.org/cxx_status.html) or [GCC 4.8.1](https://gcc.gnu.org/projects/cxx-status.html#cxx11)
+-  LIMEX uses C++11 features, so one needs at least the following compiler revisions: [Clang 3.3](https://clang.llvm.org/cxx_status.html) or [GCC 4.8.1](https://gcc.gnu.org/projects/cxx-status.html#cxx11)
 - When using LIMEX as the time stepping scheme and concurrently outputting VTK
 data one should consider using an older version of the LIMEX plugin since collecting
 `pvd` files are not correctly written by: `git checkout 1384a90d0d1f75f582563e71cdf4295f17bfd474`. 
