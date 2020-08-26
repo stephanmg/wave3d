@@ -1,6 +1,9 @@
 # Wave3d
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e26da086ea2243dbb4399b212885cd4a)](https://app.codacy.com/manual/stephan_5/wave3d?utm_source=github.com&utm_medium=referral&utm_content=stephanmg/wave3d&utm_campaign=Badge_Grade_Dashboard)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+
+
 
 The repository contains grids (*UGX*) and script (*LUA*) files to initiate a calcium wave in neurons.
 
