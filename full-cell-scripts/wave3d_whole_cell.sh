@@ -8,7 +8,7 @@
 cd $PBS_O_WORKDIR
 
 # grid and script
-SCRIPT=markus.lua
+SCRIPT=wave3d_whole_cell.lua
 GRID=/home/tug41634/ExampleSubsets.ugx
 
 # settings
@@ -21,8 +21,10 @@ VTK_FOLDER=vtkWholeCell
 RYR_DENSITY=1.00
 NUM_TIME_STEPS=10000
 VTK_WRITE_INTERVAL=100
-mpirun -np 1 ugshell \
-       -ex wave3d_whole_cell.lua \
+BINARY=ugshell
+NP=1
+mpirun -np "$NP" "$BINARY" \
+       -ex "$SCRIPT"  \
        -grid "$GRID"  \
        -endTime "$END_TIME" \
        -tol "$TOL" \
