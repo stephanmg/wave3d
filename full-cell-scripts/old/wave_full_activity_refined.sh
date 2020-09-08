@@ -5,7 +5,7 @@
 #PBS -N wave3d_revised_multi_measure_zones_FULL_ACTIVITY_refined
 #PBS -q normal
 #PBS -l nodes=1:ppn=1
-cd $PBS_O_WORKDIR
+cd "$PBS_O_WORKDIR"
 SCRIPT=wave3d_revised_multi_measure_zones_FULL_ACTIVITY.lua
 GRID=/home/tug41634/single_branch2_w_branch_meas_new.ugx
 SOLVER=GMG
