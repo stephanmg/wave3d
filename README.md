@@ -5,7 +5,7 @@
 
 
 
-The repository contains grids (*UGX*) and script (*LUA*) files to initiate a calcium wave in neurons.
+The repository contains grids (*UGX*) and script (*LUA*) files to initiate a calcium wave in neurons. Additionally job scripts for the local HPC cluster Owlsnest2 at Temple are provided and `GNU R` plotting scripts to evaluate measurements on the meshes. Required are `SuperLU` and `Parmetis` for parallel computation.
 
 ## Prerequisites
 Recent versions of [ug4](https://github.com/UG4/ugcore), [neuro collection](https://github.com/NeuroBox3D/neuro_collection), [convection diffusion](https://github.com/UG4/plugin_ConvectionDiffusion), LIMEX, Parmetis and LUA2C are required (The latter three are currently not publicly available but available through the group-internal Quadruped repository).
