@@ -1,0 +1,1 @@
+ugshell -ex wave3d/non-adaptive/scripts/y/wave_creation_3d_original.lua -grid modelDendrite3d.ugx -numRefs 2 -ryrDens 2.5 -setting ryr -dt 1e-6 -endTime 0.5 -solver GMG  -tol 0.02  -outName .  -vtk  -pstep 0.00025
